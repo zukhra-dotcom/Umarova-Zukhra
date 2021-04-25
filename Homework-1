@@ -1,0 +1,409 @@
+1. MyArrayList: public void add(T newItem, int index)
+
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MyArrayList<Integer> array = new MyArrayList<>();
+
+        array.add(1, 0);
+        array.add(5, 1);
+        array.add(10, 2);
+        array.add(15, 3);
+        array.add(20, 4);
+        array.add(25, 5);
+        array.add(30, 6);
+        array.add(35, 7);
+        array.add(40, 8);
+        array.add(45, 9);
+
+        System.out.println(array);
+    }
+}
+___
+package com.company;
+import java.util.Arrays;
+
+public class MyArrayList<T> {
+    private T[] array;
+    private int size = 0;
+    private int capacity = 10;
+
+    public MyArrayList() {
+        array = (T[]) new Object[capacity];
+    }
+
+    public int size(){
+        return size;
+    }
+
+    public boolean add(T newItem){
+        this.add(newItem, size);
+        return true;
+    }
+
+    public void add(T newItem, int index ){
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException("index " + index + " is out of bounds for size " + size);
+        }
+        array[index] = newItem;
+        size++;
+    }
+
+
+    public String toString() {
+        return Arrays.toString(array);
+    }
+}
+
+_____________________________________________________________________________________________________________________________________
+
+2. ArrayList: public int find(T keyItem) - returns index or -1
+
+package com.company;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MyArrayList  array = new MyArrayList();
+
+        array.add("dog", 0);
+        array.add("cat", 1);
+        array.add("bird", 2);
+        array.add("monkey", 3);
+        array.add("snake", 4);
+        array.add("fish", 5);
+
+        System.out.println("Arraylist is: " + array + "\n");
+        System.out.println(array);
+    }
+}
+
+package com.company;
+import java.util.Arrays;
+
+public class MyArrayList<T> {
+    private T[] array;
+    private int size = 0;
+    private int capacity = 6;
+
+    public MyArrayList() {
+        array = (T[]) new Object[capacity];
+    }
+
+    public int size(){
+        return size;
+    }
+
+    public void add(T keyItem, int index ){
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException("index " + index + " is out of bounds for size " + size);
+        }
+        array[index] = keyItem;
+        size++;
+    }
+    
+    public int find(T keyItem){
+        for(int i=0; i<array.length; i++){
+            System.out.println(array.LastIndexOf("dog"));
+        }
+        return -1;
+    }
+    
+    public String toString() {
+        return Arrays.toString(array);
+    }
+}
+
+_________________________________________________________________________________________________________________________
+
+3. MyArrayList: public T remove(int index) - returns removed element
+
+package com.company;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<Integer> ArrayList = new ArrayList<Integer>(5);
+        ArrayList.add(10);
+        ArrayList.add(20);
+        ArrayList.add(30);
+        ArrayList.add(40);
+
+        System.out.println("ArrayList size: " + ArrayList.size());
+
+        for(Integer number : ArrayList) {
+            System.out.println("Number: " + number);
+        }
+
+        Integer element = ArrayList.remove(2);
+        ArrayList.remove(2);
+
+        System.out.println("ArrayList size after using remove(int index) method: " + ArrayList.size());
+        System.out.println("\n");
+        System.out.println("Removed Element: " + element);
+    }
+}
+_________________________________________________________________________________________________________________
+
+4. MyArrayList: public void reverse() - reverses the ArrayList
+
+package com.company;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+
+        fruits.add("apple");
+        fruits.add("mango");
+        fruits.add("orange");
+        fruits.add("banana");
+        fruits.add("lemon");
+
+        ArrayList<String> newFruits = reverse(fruits);
+        System.out.println(newFruits);
+    }
+    
+    public static ArrayList<String> reverse(ArrayList<String> fruits){
+        ArrayList<String> result = new ArrayList<String>();
+
+        for(int i = fruits.size()-1; i>=0; i--){
+            result.add(fruits.get(i));
+        }
+        return result;
+    }
+
+}
+
+_________________________________________________________________________________________
+5. MyLinkedList: public void add(T newItem, int index)
+
+package com.company;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class Main {
+
+    public static void main(String[] args) {
+    MyLinkedList<String> sentence = new MyLinkedList<>();
+
+        sentence.add("My");
+        sentence.add("favourite");
+        sentence.add("color is");
+        sentence.add("blue");
+
+    for(int i = 0; i<sentence.getSize(); i++){
+        System.out.print(sentence.get(i) + " ");
+    }
+    }
+}
+_______
+package com.company;
+import java.util.Arrays;
+
+
+public class MyLinkedList<T> {
+        private MyNode<T> head;
+        private MyNode<T> tail;
+        private int size;
+
+        public MyLinkedList() {
+        }
+
+        public void add(T newItem){
+            MyNode<T> newNode = new MyNode<>(newItem);
+            if(head == null){
+                head = tail = newNode;
+            }
+            else{
+                tail.next = newNode;
+                tail = newNode;
+            }
+            size++;
+        }
+
+        public T get(int index){
+            MyNode<T> current = head;
+            for(int i = 0; i < index; i++){
+                current = current.next;
+            }
+            return current.data;
+       }
+
+    public int getSize() {
+        return size;
+    }
+
+    private static class  MyNode<E>{
+            E data;
+            MyNode<E> next;
+
+            MyNode(E data){
+                this.data = data;
+            }
+       }
+}
+
+______________________________________________________________________________________________________
+
+6. MyLinkedList: public T remove(int index) - returns  removed element
+
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+    MyLinkedList<Integer> LinkedList = new MyLinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        list.insert(100);
+        list.insert(200);
+        list.insert(300);
+        list.insert(400);
+        list.insert(500);
+
+        list.displayLinkedList();
+
+        int keyItem = 100;
+
+        if(list.contains(keyItem)){
+            System.out.println(keyItem + " found in Linked List!");
+        }else {
+            System.out.println(keyItem + " not found in Linked List!");
+        }
+    }
+}
+___________
+package com.company;
+
+public class MyLinkedList<T> {
+
+    private Node<T> head;
+
+    //This internal class represents Node in Linked List
+    private static class Node<T> {
+        private T data;
+        private Node<T> next;
+
+        private Node(T data) {
+            super();
+            this.data = data;
+            this.next = null;
+        }
+    }
+    public boolean contains(T keyItem){
+        if(head == null){
+            return false;
+        }
+        Node<T> currentNode = head;
+        while (currentNode != null){
+            if(currentNode.data == keyItem){
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
+        return false;
+    }
+
+    public void insert(T data) {
+        Node<T> newNode = new Node<T>(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node<T> currentNode = head;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = newNode;
+        }
+    }
+
+    public void displayLinkedList() {
+        Node<T> currentNode = head;
+        while (currentNode != null) {
+            System.out.print(currentNode.data + "->");
+            currentNode = currentNode.next;
+        }
+        System.out.println(currentNode);
+    }
+}
+______________________________________________________________________________________________________________________
+
+7. MyLinkedList: public T remove(int index) - returns removed element
+
+package com.company;
+import java.util.LinkedList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<String>();
+
+        list.add("Dog");
+        list.add("Cat");
+        list.add("Monkey");
+        list.add("Cow");
+        list.add("Snake");
+
+        System.out.println("LinkedList:" + list);
+
+        String element = list.remove(2);
+
+        System.out.println("Final LinkedList:" + list);
+        System.out.println("Removed Element: " + element);
+    }
+}
+
+__________________________________________________________________________________________
+8. MyLinkedList: public void reverse() - reverses the LinkedList
+package com.company;
+import java.util.LinkedList;
+
+public class Main {
+
+    static Node head;
+    static class Node {
+        int data;
+        Node next;
+        Node(int dt) {
+            data = dt;
+            next = null;
+        }
+    }
+
+    public void reverse(Node node) {
+        Node prev = null;
+        Node current = node;
+        Node next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        node = prev;
+    }
+
+    void printList(Node node) {
+        while (node != null) {
+            System.out.print(node.data + " ");
+            node = node.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.head = new Node(15);
+        list.head.next = new Node(20);
+        list.head.next.next = new Node(40);
+        list.head.next.next.next = new Node(55);
+
+        System.out.println("Reversed linked list ");
+        list.printList(head);
+    }
+}
